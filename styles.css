@@ -5,48 +5,101 @@
 }
 
 :root {
-    --primary-color: #4A5568;
-    --accent-color: #5A67D8;
-    --background-color: #F7FAFC;
-    --surface-color: #FFFFFF;
-    --text-color: #2D3748;
-    --border-color: #E2E8F0;
+    --glass-background: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+    --accent-color: rgba(255, 255, 255, 0.8);
+    --text-color: rgba(255, 255, 255, 0.9);
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: var(--background-color);
+    background: #000;
     color: var(--text-color);
-    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.blur-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.circle-1 {
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 82, 82, 0.8);
+    top: -100px;
+    right: -100px;
+    animation: float 8s ease-in-out infinite;
+}
+
+.circle-2 {
+    width: 400px;
+    height: 400px;
+    background: rgba(130, 82, 255, 0.8);
+    bottom: -100px;
+    left: -100px;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -30px); }
 }
 
 .container {
-    text-align: center;
-    background-color: var(--surface-color);
-    padding: 3rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 400px;
+    padding: 3rem;
 }
 
-h1 {
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    font-weight: 600;
+.glass {
+    background: var(--glass-background);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 var(--glass-shadow);
+}
+
+.mode-indicator {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    text-align: center;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 .timer {
     font-size: 6rem;
-    font-weight: 300;
-    color: var(--primary-color);
+    font-weight: 200;
+    text-align: center;
     margin-bottom: 2.5rem;
     font-variant-numeric: tabular-nums;
+    letter-spacing: -2px;
+}
+
+.colon {
+    opacity: 0.5;
 }
 
 .duration-setter {
@@ -54,69 +107,58 @@ h1 {
 }
 
 .duration-input-wrapper {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    background-color: var(--background-color);
-    border-radius: 8px;
-    padding: 0.25rem;
-    border: 1px solid var(--border-color);
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.duration-input-wrapper input {
-    width: 80px;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: none;
-    background: transparent;
-    text-align: center;
+.glass-input input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 0.8rem;
+    width: 100px;
     color: var(--text-color);
+    font-size: 1rem;
+    text-align: center;
 }
 
-.duration-input-wrapper input:focus {
+.glass-input input:focus {
     outline: none;
-}
-
-.duration-input-wrapper button {
-    margin: 0;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    background-color: var(--surface-color);
+    border-color: var(--accent-color);
 }
 
 .controls {
     display: flex;
-    gap: 0.75rem;
+    gap: 1rem;
     justify-content: center;
 }
 
-button {
-    padding: 0.75rem 1.5rem;
+.glass-button {
+    background: var(--glass-background);
+    color: var(--text-color);
+    border: 1px solid var(--glass-border);
+    padding: 1rem 2rem;
+    border-radius: 12px;
     font-size: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    background-color: var(--surface-color);
-    color: var(--primary-color);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
-button:hover {
-    background-color: var(--background-color);
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .primary-btn {
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .primary-btn:hover {
-    background-color: #4C51BF;
-    color: white;
-}
-
-#reset, #add-time {
-    background-color: var(--surface-color);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 /* Remove spinner buttons from number input */
@@ -125,6 +167,7 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type="number"] {
     -moz-appearance: textfield;
 } 

@@ -1,6 +1,7 @@
-let timeLeft = 25 * 60; // 25 minutes in seconds
+let timeLeft = 5 * 60; // 5 minutes in seconds
 let timerId = null;
-let originalTime = 25 * 60;
+let originalTime = 5 * 60;
+let isWorkMode = true;
 
 const minutesDisplay = document.getElementById('minutes');
 const secondsDisplay = document.getElementById('seconds');
@@ -9,12 +10,28 @@ const resetButton = document.getElementById('reset');
 const addTimeButton = document.getElementById('add-time');
 const durationInput = document.getElementById('duration');
 const setDurationButton = document.getElementById('set-duration');
+const modeText = document.getElementById('mode-text');
+const timerComplete = document.getElementById('timer-complete');
 
 function updateDisplay() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
     minutesDisplay.textContent = minutes.toString().padStart(2, '0');
     secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+    document.title = `${minutes}:${seconds.toString().padStart(2, '0')} - ${isWorkMode ? 'Work' : 'Rest'}`;
+}
+
+function toggleMode() {
+    isWorkMode = !isWorkMode;
+    timeLeft = 5 * 60; // Reset to 5 minutes
+    originalTime = timeLeft;
+    modeText.textContent = isWorkMode ? 'WORK' : 'REST';
+    updateDisplay();
+}
+
+function playSound() {
+    timerComplete.currentTime = 0;
+    timerComplete.play().catch(error => console.log('Error playing sound:', error));
 }
 
 function toggleTimer() {
@@ -31,7 +48,11 @@ function toggleTimer() {
                 timerId = null;
                 startButton.textContent = 'Start';
                 startButton.classList.remove('active');
-                alert('Time is up!');
+                playSound();
+                setTimeout(() => {
+                    toggleMode();
+                    updateDisplay();
+                }, 500);
             }
         }, 1000);
     } else {
