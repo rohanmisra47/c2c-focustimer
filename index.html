@@ -13,14 +13,15 @@
             <span id="minutes">25</span>:<span id="seconds">00</span>
         </div>
         <div class="duration-setter">
-            <input type="number" id="duration" min="1" placeholder="Minutes" value="25">
-            <button id="set-duration">Set Duration</button>
+            <div class="duration-input-wrapper">
+                <input type="number" id="duration" min="1" placeholder="Minutes" value="25">
+                <button id="set-duration">Set</button>
+            </div>
         </div>
         <div class="controls">
-            <button id="start">Start</button>
-            <button id="stop">Pause</button>
+            <button id="start" class="primary-btn">Start</button>
             <button id="reset">Reset</button>
-            <button id="add-time">+5 Minutes</button>
+            <button id="add-time">+5</button>
         </div>
     </div>
     <script src="script.js"></script>
