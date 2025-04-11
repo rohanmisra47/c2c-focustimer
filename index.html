@@ -7,23 +7,30 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Focus Timer</h1>
-        <div class="timer">
-            <span id="minutes">25</span>:<span id="seconds">00</span>
+    <div class="background">
+        <div class="blur-circle circle-1"></div>
+        <div class="blur-circle circle-2"></div>
+    </div>
+    <div class="container glass">
+        <div class="mode-indicator">
+            <span id="mode-text">WORK</span>
         </div>
-        <div class="duration-setter">
+        <div class="timer">
+            <span id="minutes">05</span><span class="colon">:</span><span id="seconds">00</span>
+        </div>
+        <div class="duration-setter glass-input">
             <div class="duration-input-wrapper">
-                <input type="number" id="duration" min="1" placeholder="Minutes" value="25">
-                <button id="set-duration">Set</button>
+                <input type="number" id="duration" min="1" placeholder="Minutes" value="5">
+                <button id="set-duration" class="glass-button">Set</button>
             </div>
         </div>
         <div class="controls">
-            <button id="start" class="primary-btn">Start</button>
-            <button id="reset">Reset</button>
-            <button id="add-time">+5</button>
+            <button id="start" class="glass-button primary-btn">Start</button>
+            <button id="reset" class="glass-button">Reset</button>
+            <button id="add-time" class="glass-button">+5</button>
         </div>
     </div>
+    <audio id="timer-complete" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
     <script src="script.js"></script>
 </body>
 </html> 
